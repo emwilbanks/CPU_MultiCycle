@@ -4,7 +4,7 @@ module testbenchBubble();
 // Total execution time: 85900ps
    reg clk_tb, rst_tb;
    
-   localparam CLK_PERIOD = 100;
+   localparam CLK_PERIOD = 300;
    
    CPU_MultiCycle myCPU(clk_tb, rst_tb);
    
