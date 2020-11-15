@@ -67,17 +67,10 @@ module testbenchBubble();
       clk_tb <= 1;       # (CLK_PERIOD/2);
       clk_tb <= 0;       # (CLK_PERIOD/2);
    end
-   
 
-  always@(posedge clk_tb)
-    begin
-        //////////////////////////////////////////////////
-        // CHANGE PC VALUE IN THIS IF STATEMENT
-        // ADD 4 TIMES THE AMOUNT OF INSTRUCTIONS YOU RUN
-        if(myCPU.b2v_PCR.Q === 92) begin
-        //////////////////////////////////////////////////
-        // CHANGE THIS TEST
-        // CURRENT TEST ASSUMES YOU SWAPPED THE THIRD AND SIXTH
+   always @*
+   begin
+       if(myCPU.b2v_PCR.Q == 92) begin
           if ( 
              (myCPU.b2v_IDM.memory[512 >> 2] < myCPU.b2v_IDM.memory[516 >> 2]) &&
              (myCPU.b2v_IDM.memory[516 >> 2] < myCPU.b2v_IDM.memory[520 >> 2]) &&
@@ -90,17 +83,16 @@ module testbenchBubble();
              (myCPU.b2v_IDM.memory[544 >> 2] < myCPU.b2v_IDM.memory[548 >> 2]) &&
              (myCPU.b2v_IDM.memory[548 >> 2] < myCPU.b2v_IDM.memory[552 >> 2]) &&
              (myCPU.b2v_IDM.memory[552 >> 2] < myCPU.b2v_IDM.memory[556 >> 2])  )
-
-
- begin
-             $display("CPU functional");
-             $stop;
+                 begin
+                     $display("CPU functional");
+                     $stop;
+                 end
+                 else begin
+                 $display("CPU not functional");
+                 $stop;
+                 end
           end
-          else begin
-             $display("CPU not functional");
-             $stop;
-           end
+
        end
-   end
  
 endmodule
